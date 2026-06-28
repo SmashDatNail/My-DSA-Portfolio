@@ -1,5 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import segfaultTitle from "../assets/segfault-title.png";
+import padlet01 from "../assets/padlet/01-intro.png";
+import padlet02 from "../assets/padlet/02-chapter1-note.png";
+import padlet03 from "../assets/padlet/03-turn-based-game.png";
+import padlet04 from "../assets/padlet/04-car-race.png";
+import padlet05 from "../assets/padlet/05-student-management-adt.png";
+import padlet06 from "../assets/padlet/06-decimal-to-binary-stack.png";
+import padlet07 from "../assets/padlet/07-restaurant-queue.png";
+import padlet08 from "../assets/padlet/08-sorting-visualization.png";
+import padlet09 from "../assets/padlet/09-student-search.png";
+import padlet10 from "../assets/padlet/10-music-player-linked-list.png";
+import padlet11 from "../assets/padlet/11-binary-tree-website.png";
 import { motion } from "motion/react";
 import {
   BookOpen,
@@ -16,6 +27,7 @@ const SECTIONS = [
   "intro",
   "journey",
   "projects",
+  "padlet",
   "skills",
   "reflections",
 ];
@@ -195,6 +207,20 @@ const reflections = [
   },
 ];
 
+const padlet = [
+  { src: padlet01, title: "Intro to Me", tag: "Introduction", tilt: "rotate-[-2deg]" },
+  { src: padlet02, title: "Chapter 1 Note", tag: "Introduction", tilt: "rotate-[1.5deg]" },
+  { src: padlet03, title: "A Simple Turn-Based Game in C++", tag: "C++ Fundamentals", tilt: "rotate-[-1deg]" },
+  { src: padlet04, title: "Car Race Calculation (Array + Sorting)", tag: "Arrays", tilt: "rotate-[2deg]" },
+  { src: padlet05, title: "Student Management using ADT", tag: "Abstract Data Types", tilt: "rotate-[-1.5deg]" },
+  { src: padlet06, title: "Decimal to Binary Converter (Manual Stack)", tag: "Stack", tilt: "rotate-[1deg]" },
+  { src: padlet07, title: "Restaurant Ordering System (Queue)", tag: "Queue", tilt: "rotate-[-2deg]" },
+  { src: padlet08, title: "15 Sorting Algorithm Visualization", tag: "Sorting", tilt: "rotate-[1.5deg]" },
+  { src: padlet09, title: "Student Search (Binary Search + Quicksort)", tag: "Searching", tilt: "rotate-[-1deg]" },
+  { src: padlet10, title: "Music Player using Linked List", tag: "Linked List", tilt: "rotate-[2deg]" },
+  { src: padlet11, title: "Website Explaining Binary Trees", tag: "Tree", tilt: "rotate-[-1.5deg]" },
+];
+
 const tagColors: Record<string, string> = {
   Setup: "bg-slate-100 text-slate-500",
   Theory: "bg-slate-200 text-slate-700",
@@ -303,6 +329,7 @@ export default function App() {
     { id: "intro", label: "Introduction" },
     { id: "journey", label: "Chapter Journey" },
     { id: "projects", label: "Projects" },
+    { id: "padlet", label: "Padlet Wall" },
     { id: "skills", label: "Skill Growth" },
     { id: "reflections", label: "Reflections" },
   ];
@@ -612,6 +639,58 @@ export default function App() {
               </div>
             </motion.article>
           ))}
+        </section>
+
+        {/* PADLET */}
+        <section
+          id="padlet"
+          ref={(el) => {
+            sectionRefs.current["padlet"] = el;
+          }}
+          className="bg-slate-100 px-8 md:px-16 py-20 lg:py-28"
+        >
+          <p className="font-mono text-xs text-[#3D5A80] tracking-widest uppercase mb-3">
+            Course Wall
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+            Padlet Contributions
+          </h2>
+          <p className="font-sans text-slate-500 mb-12 max-w-lg leading-relaxed">
+            Posts I shared on our class Padlet across the semester — notes, code
+            demos, and references — laid out from my introduction through to trees.
+          </p>
+
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+            {padlet.map((item, i) => (
+              <motion.div
+                key={item.src}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
+                viewport={{ once: true, margin: "-40px" }}
+                className="mb-5 break-inside-avoid"
+              >
+                <div
+                  className={`group ${item.tilt} transition-transform duration-300 ease-out hover:rotate-0 hover:-translate-y-1`}
+                >
+                  <figure className="bg-white rounded-xl overflow-hidden shadow-lg ring-1 ring-slate-900/5 transition-shadow duration-300 group-hover:shadow-2xl">
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      loading="lazy"
+                      className="w-full h-auto block"
+                    />
+                    <figcaption className="flex items-center gap-2 px-4 py-2.5 border-t border-slate-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#3D5A80] flex-shrink-0" />
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 truncate">
+                        {item.tag}
+                      </span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
         {/* SKILLS */}
